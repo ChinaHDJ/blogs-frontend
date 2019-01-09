@@ -45,7 +45,6 @@ class PageLogin extends React.Component {
   };
 
   handleClick = ()=> {
-    console.log(RequestApi.Token.requestToken(1,2,3));
   };
 
   renderLinearProgress = () => {
@@ -56,10 +55,19 @@ class PageLogin extends React.Component {
   }
 
   handleSubmit(data) {
+    const { email, password, captcha = {} } = data;
+
+    console.log(RequestApi.Token.requestToken({
+      session: {
+        email: email.value,
+        password: password.value,
+        captcha: captcha.value,
+      }
+    }));
   }
 
   render() {
-    const { classes = {}, dispatch } = this.props;
+    const { classes = {} } = this.props;
     const { remember_me = false } = this.state;
 
     return (
@@ -69,7 +77,7 @@ class PageLogin extends React.Component {
           <br/><br/><br/>
           <Card className={classes.card}>
             <CardContent>
-              <form id='loginForm' onSubmit={FormApi.onSubmit(this.handleChange.bind(this),'loginForm')}>
+              <form id='loginForm' onSubmit={FormApi.onSubmit(this.handleSubmit.bind(this),'loginForm')}>
                 {this.renderLinearProgress()}
 
                 <TextField

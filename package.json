@@ -33,12 +33,13 @@
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
+    "classnames": "latest",
+    "jsonapi-normalizer": "^2.0.1",
     "lodash": "^4.17.11",
     "notistack": "^0.4.1",
     "nprogress": "^0.2.0",
-    "react-transition-group": "^2.5.2",
     "prop-types": "latest",
     "react": "latest",
-    "classnames": "latest"
+    "react-transition-group": "^2.5.2"
   }
 }
