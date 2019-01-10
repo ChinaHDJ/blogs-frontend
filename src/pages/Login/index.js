@@ -57,7 +57,7 @@ class PageLogin extends React.Component {
   handleSubmit(data) {
     const { email, password, captcha = {} } = data;
 
-    console.log(RequestApi.Token.requestToken({
+    console.log(RequestApi.requestToken({
       session: {
         email: email.value,
         password: password.value,
