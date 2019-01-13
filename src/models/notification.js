@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { message } from 'antd';
-import {NotificationContainer, NotificationManager} from '../../lib/SnackbarApi';
+import {NotificationContainer, NotificationManager} from '../lib/SnackbarApi';
 
 let keyCount = 0;
 

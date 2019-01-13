@@ -24,7 +24,7 @@ import Notifier from "./Notifier";
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import NotificationContainer from "../../lib/SnackbarApi/NotificationContainer";
+import NotificationContainer from "../lib/SnackbarApi/NotificationContainer";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { Badge, Avatar } from '@material-ui/core';
@@ -183,7 +183,7 @@ class PersistentDrawerLeft extends React.Component {
               <MenuIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" noWrap>
-                {title}135
+                {title}
               </Typography>
 
               <div className={classes.grow} />
@@ -244,7 +244,6 @@ class PersistentDrawerLeft extends React.Component {
             </List>
           </Drawer>
         </div>
-        <br/><br/><br/>
         {this.props.children}
         <NotificationContainer/>
       </Fragment>

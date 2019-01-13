@@ -1,3 +1,5 @@
+import chainWebpack from 'webpack-chain';
+
 export default {
   plugins: [
     ['umi-plugin-react', {
@@ -12,7 +14,9 @@ export default {
       component: '../layouts',
       routes: [
         { path: '/', component: './Home' },
-        { path: '/login', component: './Login' }
+        { path: '/login', component: './Login' },
+        { path: '/user', component: './User'},
+        { path: '/user/:id', component: './User'},
       ]
     }
     ],

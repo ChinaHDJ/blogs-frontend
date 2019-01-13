@@ -13,9 +13,8 @@ import {withSnackbar} from "notistack";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import  { connect } from 'dva';
 import { Form} from 'antd';
-import FormApi from '../../../lib/FormApi'
-import Input from "@material-ui/core/es/Input/Input";
-import RequestApi from '../../../lib/RequestApi';
+import FormApi from '@/lib/FormApi';
+import LoadButton from '@/lib/component/LoadButton';
 
 const styles = {
   card: {
@@ -34,7 +33,13 @@ const styles = {
   },
 };
 @Form.create()
-@connect((data)=>({data}))
+@connect(({ loading }) => {
+  console.log(loading);
+
+  return {
+    loading: loading.effects['user/login']
+  }
+})
 class PageLogin extends React.Component {
   state = {
     remember_me: true,
@@ -56,18 +61,25 @@ class PageLogin extends React.Component {
 
   handleSubmit(data) {
     const { email, password, captcha = {} } = data;
+    const { dispatch } = this.props;
 
-    console.log(RequestApi.requestToken({
-      session: {
-        email: email.value,
-        password: password.value,
-        captcha: captcha.value,
+    dispatch({
+      type: 'user/login',
+      payload: {
+        url: '/api/v1/sessions',
+        data: {
+          session: {
+            email: email.value,
+            password: password.value,
+            captcha: captcha.value,
+          }
+        }
       }
-    }));
+    });
   }
 
   render() {
-    const { classes = {} } = this.props;
+    const { classes = {}, loading } = this.props;
     const { remember_me = false } = this.state;
 
     return (
@@ -107,8 +119,8 @@ class PageLogin extends React.Component {
                   label="记住我"
                 />
 
-                <CardActions align='center'>
-                  <Button onClick={this.handleClick} size="small" variant="contained" color="primary" type={'submit'} style={{width: '100px'}}>登入</Button>
+                <CardActions>
+                  <LoadButton loading={loading} onClick={this.handleClick} size="small" variant="contained" color="primary" type={'submit'} style={{width: '100px'}}>登入</LoadButton>
                 </CardActions>
               </form>
             </CardContent>
