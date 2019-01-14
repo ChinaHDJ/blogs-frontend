@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab/Tab';
 import SwipeableViews from 'react-swipeable-views';
 import FollowingList from './common/component/FollowingList';
 import FavList from './common/component/FavList';
+import { Tag } from 'antd';
 import logo from '../../assets/8.jpg';
 
 const styles = theme => ({
@@ -72,8 +73,46 @@ class User extends React.Component {
         >
           <Grid item xs={'auto'} sm={2} />
           <Grid item xs={12} sm={8}>
-            <Paper className={classes.paper} style={{ left: 0, bottom: 0, position: 'inherit' }}>
-              <Avatar className={classes.avatar} />
+            <Paper className={classes.paper}>
+              <Grid
+                container
+              >
+                <Grid item
+                      xs={3}
+                      sm='auto'
+                >
+                  <Avatar className={classes.avatar} />
+                </Grid>
+
+
+                <Grid
+                  item
+                  xs={9}
+                  sm={8}
+                  container
+                >
+                  <Grid
+                    item
+                    xs
+                    container
+                    direction="column"
+                    spacing={16}
+                    justify="flex-end"
+                    alignItems="flex-start"
+                    style={{marginLeft: 5}}
+                  >
+                    <Grid item xs>
+                      <div style={{height: 30}}>
+                        <h2><b style={{color: '#0277bd'}}>ChinaHDJ</b></h2>
+                      </div>
+
+                      <div style={{height: 50, color: '#b0bec5'}}>
+                        在别人贪婪的时候恐惧，在别人恐惧的时候贪婪。                 ---沃伦 巴菲特
+                      </div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Paper>
             <br />
           </Grid>
@@ -88,8 +127,8 @@ class User extends React.Component {
             textColor="primary"
             centered
           >
-            <Tab label="关注" />
-            <Tab label="收藏" />
+            <Tab label="个人主页" />
+            <Tab label="关注内容" />
           </Tabs>
         </Paper>
         <br />
