@@ -1,12 +1,11 @@
-class FormApi{
-
-  static getForm(formId){
+class FormApi {
+  static getForm(formId) {
     const form = document.getElementById(formId);
 
-    return FormApi.foreachFormElement(form)
+    return FormApi.foreachFormElement(form);
   }
 
-  static foreachFormElement(form){
+  static foreachFormElement(form) {
     const fieldData = {};
 
     ['input', 'check'].forEach(tag => {
@@ -22,11 +21,11 @@ class FormApi{
     return fieldData;
   }
 
-  static onSubmit = (onSubmit, formId) => (event) => {
+  static onSubmit = (onSubmit, formId) => event => {
     event.preventDefault();
 
     onSubmit(FormApi.getForm(formId));
-  }
+  };
 }
 
 export default FormApi;

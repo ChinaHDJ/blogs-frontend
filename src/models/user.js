@@ -1,20 +1,22 @@
-import NotificationManager from "@/lib/SnackbarApi/NotificationManager";
+import NotificationManager from '@/lib/SnackbarApi/NotificationManager';
 import RequestApi from '@/lib/RequestApi';
 
 export default {
   namespace: 'user',
   state: {},
   effects: {
-    *login({ payload }, { put }){
-      if (!RequestApi.getUserToken()){
+    *login({ payload }, { put }) {
+      if (!RequestApi.getUserToken()) {
         const response = yield put.resolve({
           type: 'request/post',
-          payload
+          payload,
         });
 
-        const { data: { success, message, token } } = response;
+        const {
+          data: { success, message, token },
+        } = response;
 
-        if (success){
+        if (success) {
           localStorage.setItem('user_token', token);
         }
 
@@ -22,20 +24,18 @@ export default {
         return;
       }
 
-      NotificationManager.info({ message: "你已经登录过了。请注销之后再登入" })
+      NotificationManager.info({ message: '你已经登录过了。请注销之后再登入' });
     },
-    *curr(_none, { put }){
+    *curr(_none, { put }) {
       const token = this.getUserToken();
-      if (!token){
-
+      if (!token) {
         yield put.resolve({
           type: 'request/get',
-
         });
-        return
+        return;
       }
 
       return null;
-    }
-  }
-}
+    },
+  },
+};

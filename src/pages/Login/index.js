@@ -5,14 +5,14 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Grid from "@material-ui/core/Grid/Grid";
-import TextField from "@material-ui/core/TextField/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox/Checkbox";
-import {withSnackbar} from "notistack";
+import Grid from '@material-ui/core/Grid/Grid';
+import TextField from '@material-ui/core/TextField/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox/Checkbox';
+import { withSnackbar } from 'notistack';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import  { connect } from 'dva';
-import { Form} from 'antd';
+import { connect } from 'dva';
+import { Form } from 'antd';
 import FormApi from '@/lib/FormApi';
 import LoadButton from '@/lib/component/LoadButton';
 
@@ -37,8 +37,8 @@ const styles = {
   console.log(loading);
 
   return {
-    loading: loading.effects['user/login']
-  }
+    loading: loading.effects['user/login'],
+  };
 })
 class PageLogin extends React.Component {
   state = {
@@ -49,15 +49,14 @@ class PageLogin extends React.Component {
     this.setState({ [name]: event.target.checked });
   };
 
-  handleClick = ()=> {
-  };
+  handleClick = () => {};
 
   renderLinearProgress = () => {
     const { loading } = this.state;
-    if (loading){
-      return <LinearProgress/>
+    if (loading) {
+      return <LinearProgress />;
     }
-  }
+  };
 
   handleSubmit(data) {
     const { email, password, captcha = {} } = data;
@@ -72,9 +71,9 @@ class PageLogin extends React.Component {
             email: email.value,
             password: password.value,
             captcha: captcha.value,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
@@ -84,26 +83,31 @@ class PageLogin extends React.Component {
 
     return (
       <Grid container>
-        <Grid item lg={4} xs={12}/>
+        <Grid item lg={4} xs={12} />
         <Grid item lg={4} xs={12}>
-          <br/><br/><br/>
+          <br />
+          <br />
+          <br />
           <Card className={classes.card}>
             <CardContent>
-              <form id='loginForm' onSubmit={FormApi.onSubmit(this.handleSubmit.bind(this),'loginForm')}>
+              <form
+                id="loginForm"
+                onSubmit={FormApi.onSubmit(this.handleSubmit.bind(this), 'loginForm')}
+              >
                 {this.renderLinearProgress()}
 
                 <TextField
                   ref="email"
                   label="邮箱"
                   name="email"
-                  style={{width: '100%'}}
+                  style={{ width: '100%' }}
                   margin="normal"
                 />
 
                 <TextField
                   label="密码"
-                  style={{width: '100%'}}
-                  type='password'
+                  style={{ width: '100%' }}
+                  type="password"
                   name="password"
                   margin="normal"
                 />
@@ -120,13 +124,23 @@ class PageLogin extends React.Component {
                 />
 
                 <CardActions>
-                  <LoadButton loading={loading} onClick={this.handleClick} size="small" variant="contained" color="primary" type={'submit'} style={{width: '100px'}}>登入</LoadButton>
+                  <LoadButton
+                    loading={loading}
+                    onClick={this.handleClick}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    type={'submit'}
+                    style={{ width: '100px' }}
+                  >
+                    登入
+                  </LoadButton>
                 </CardActions>
               </form>
             </CardContent>
           </Card>
         </Grid>
-        <Grid item lg={4} xs={12}/>
+        <Grid item lg={4} xs={12} />
       </Grid>
     );
   }

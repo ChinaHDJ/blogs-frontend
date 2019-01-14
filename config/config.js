@@ -2,11 +2,14 @@ import chainWebpack from 'webpack-chain';
 
 export default {
   plugins: [
-    ['umi-plugin-react', {
-      antd: true,
-      dva: true,
-      title: 'Blogs',
-    }],
+    [
+      'umi-plugin-react',
+      {
+        antd: true,
+        dva: true,
+        title: 'Blogs',
+      },
+    ],
   ],
   routes: [
     {
@@ -15,11 +18,11 @@ export default {
       routes: [
         { path: '/', component: './Home' },
         { path: '/login', component: './Login' },
-        { path: '/user', component: './User'},
-        { path: '/user/:id', component: './User'},
-      ]
-    }
-    ],
+        { path: '/user', component: './User' },
+        { path: '/user/:id', component: './User' },
+      ],
+    },
+  ],
 
   proxy: {
     '/api': {
@@ -27,4 +30,4 @@ export default {
       changeOrigin: true,
     },
   },
-}
+};

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { message } from 'antd';
-import {NotificationContainer, NotificationManager} from '../lib/SnackbarApi';
+import { NotificationContainer, NotificationManager } from '../lib/SnackbarApi';
 
 let keyCount = 0;
 
@@ -8,11 +8,10 @@ export default {
   namespace: 'Notification',
   state: {
     currKey: 0,
-    notifications: {
-    }
+    notifications: {},
   },
   effects: {
-    *createNotice({ payload }, { put}){
+    *createNotice({ payload }, { put }) {
       const { type, message, options, action } = payload;
 
       yield put.resolve({
@@ -25,36 +24,34 @@ export default {
           action,
         },
       });
-      NotificationManager.info({ message: 'message' })
+      NotificationManager.info({ message: 'message' });
       return { key: 0 };
     },
 
-    *deleteNotice({ key }, { put }){
-
+    *deleteNotice({ key }, { put }) {
       console.log(key);
       yield put.resolve({
         type: 'removeNotice',
         key,
       });
 
-      return { success: true }
-    }
-
+      return { success: true };
+    },
   },
   reducers: {
-    addNotice({ notifications },{ key, payload }){
-      if (!notifications[key.toString()]){
+    addNotice({ notifications }, { key, payload }) {
+      if (!notifications[key.toString()]) {
         notifications[key.toString()] = payload;
       }
 
       return { notifications, currKey: keyCount };
     },
-    removeNotice({ notifications }, { key }){
-      console.log(_.filter(notifications, ({ key: stateKey}) => stateKey !== key), 'delete')
+    removeNotice({ notifications }, { key }) {
+      console.log(_.filter(notifications, ({ key: stateKey }) => stateKey !== key), 'delete');
       return {
         notifications: {},
         currKey: 0,
-      }
-    }
-  }
-}
+      };
+    },
+  },
+};

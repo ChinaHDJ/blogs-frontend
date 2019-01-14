@@ -24,16 +24,15 @@ import jsonapiNormalize from 'jsonapi-normalizer';
  * ━━━━━━神兽出没━━━━━━by: ChinaHDJ
  */
 
-function setRequestEffect(RequestApi){
-  return function *request({ payload }, { call, put }){
+function setRequestEffect(RequestApi) {
+  return function* request({ payload }, { call, put }) {
     const { normalize = true, append = false, key, url, params, data } = payload;
 
     return yield call(RequestApi, { url, params, data });
-  }
+  };
 }
 
-
-export default function createModel(options){
+export default function createModel(options) {
   const { namespace, state = {}, effects = {}, reducers = {} } = options;
 
   return {
@@ -46,10 +45,10 @@ export default function createModel(options){
     },
     reducers: {
       normalize(state = {}, { payload }) {
-        const {options = {}, response, initialState = {result: {}, entities: {}}} = payload;
-        const {append = false, desc = false} = options;
+        const { options = {}, response, initialState = { result: {}, entities: {} } } = payload;
+        const { append = false, desc = false } = options;
 
-        const {meta = {}, data} = response;
+        const { meta = {}, data } = response;
         if (typeof data === 'undefined' || _.isEmpty(data)) {
           if (!append) {
             return {
@@ -58,7 +57,7 @@ export default function createModel(options){
             };
           }
         }
-        const {result, entities} = jsonapiNormalize(response);
+        const { result, entities } = jsonapiNormalize(response);
 
         if (_.isEmpty(result)) {
           if (append) {
@@ -83,9 +82,9 @@ export default function createModel(options){
           };
         }
 
-        let position = {first: 0, last: 1};
+        let position = { first: 0, last: 1 };
         if (desc) {
-          position = {first: 1, last: 0};
+          position = { first: 1, last: 0 };
         }
 
         const nextResult = _.cloneDeep(state.result);
@@ -101,7 +100,7 @@ export default function createModel(options){
           entities: _.merge({}, state.entities, entities),
           meta,
         };
-      }
-    }
+      },
+    },
   };
-};
+}

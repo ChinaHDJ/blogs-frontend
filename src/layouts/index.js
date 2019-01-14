@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,13 +18,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import {SnackbarProvider, withSnackbar} from "notistack";
+import { SnackbarProvider, withSnackbar } from 'notistack';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import Notifier from "./Notifier";
+import Notifier from './Notifier';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import NotificationContainer from "../lib/SnackbarApi/NotificationContainer";
+import NotificationContainer from '../lib/SnackbarApi/NotificationContainer';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { Badge, Avatar } from '@material-ui/core';
@@ -32,10 +32,9 @@ import { Badge, Avatar } from '@material-ui/core';
 const drawerWidth = 240;
 
 const styles = theme => ({
-
   root: {
     display: 'flow',
-    width: '100%'
+    width: '100%',
   },
   grow: {
     flexGrow: 1,
@@ -91,7 +90,6 @@ const styles = theme => ({
       },
     },
   },
-
 
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -180,7 +178,7 @@ class PersistentDrawerLeft extends React.Component {
                 onClick={this.handleDrawerOpen}
                 className={classNames(classes.menuButton, open && classes.hide)}
               >
-              <MenuIcon />
+                <MenuIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" noWrap>
                 {title}
@@ -203,8 +201,12 @@ class PersistentDrawerLeft extends React.Component {
 
               <div className={classes.sectionDesktop}>
                 <IconButton color="inherit">
-                  <Badge badgeContent={"99+"} invisible={true} color="secondary">
-                    <Avatar alt="Remy Sharp" src="https://avatars0.githubusercontent.com/u/16443886" className={classes.avatar} />
+                  <Badge badgeContent={'99+'} invisible={true} color="secondary">
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="https://avatars0.githubusercontent.com/u/16443886"
+                      className={classes.avatar}
+                    />
                   </Badge>
                 </IconButton>
               </div>
@@ -245,7 +247,7 @@ class PersistentDrawerLeft extends React.Component {
           </Drawer>
         </div>
         {this.props.children}
-        <NotificationContainer/>
+        <NotificationContainer />
       </Fragment>
     );
   }

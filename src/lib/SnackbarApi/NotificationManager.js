@@ -2,9 +2,9 @@ import { EventEmitter } from 'events';
 
 const createUUID = () => {
   const pattern = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx';
-  return pattern.replace(/[xy]/g, (c) => {
+  return pattern.replace(/[xy]/g, c => {
     const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : ((r & 0x3) | 0x8);
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 };
@@ -14,7 +14,7 @@ const Constants = {
   INFO: 'info',
   SUCCESS: 'success',
   WARNING: 'warning',
-  ERROR: 'error'
+  ERROR: 'error',
 };
 
 class NotificationManager extends EventEmitter {
@@ -33,7 +33,7 @@ class NotificationManager extends EventEmitter {
       anchorOrigin: {
         vertical: 'bottom',
         horizontal: 'left',
-      }
+      },
     };
 
     this.queue.push(Object.assign(defaultNotify, notify));
@@ -50,8 +50,8 @@ class NotificationManager extends EventEmitter {
     });
   }
 
-  info(json){
-    this.create(Object.assign(json, { type: Constants.INFO }))
+  info(json) {
+    this.create(Object.assign(json, { type: Constants.INFO }));
   }
 
   success(message, title, timeOut, onClick) {
@@ -60,12 +60,12 @@ class NotificationManager extends EventEmitter {
       message,
       title,
       timeOut,
-      onClick
+      onClick,
     });
   }
 
-  success(json){
-    this.create(Object.assign(json, { type: Constants.SUCCESS }))
+  success(json) {
+    this.create(Object.assign(json, { type: Constants.SUCCESS }));
   }
 
   warning(message, title, timeOut, onClick) {
@@ -74,12 +74,12 @@ class NotificationManager extends EventEmitter {
       message,
       title,
       timeOut,
-      onClick
+      onClick,
     });
   }
 
-  warning(json){
-    this.create(Object.assign(json, { type: Constants.WARNING }))
+  warning(json) {
+    this.create(Object.assign(json, { type: Constants.WARNING }));
   }
 
   error(message, title, timeOut, onClick) {
@@ -88,12 +88,12 @@ class NotificationManager extends EventEmitter {
       message,
       title,
       timeOut,
-      onClick
+      onClick,
     });
   }
 
-  error(json){
-    this.create(Object.assign(json, { type: Constants.ERROR }))
+  error(json) {
+    this.create(Object.assign(json, { type: Constants.ERROR }));
   }
 
   remove(messageObject) {

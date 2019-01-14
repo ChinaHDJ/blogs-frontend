@@ -1,17 +1,17 @@
 import React from 'react';
 import NotificationManager from './NotificationManager';
 import classNames from 'classnames';
-import Snackbar from "@material-ui/core/Snackbar/Snackbar";
-import IconButton from "@material-ui/core/IconButton/IconButton";
+import Snackbar from '@material-ui/core/Snackbar/Snackbar';
+import IconButton from '@material-ui/core/IconButton/IconButton';
 import green from '@material-ui/core/colors/green';
 import amber from '@material-ui/core/colors/amber';
-import SnackbarContent from "@material-ui/core/SnackbarContent/SnackbarContent";
+import SnackbarContent from '@material-ui/core/SnackbarContent/SnackbarContent';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import WarningIcon from '@material-ui/icons/Warning';
 import CloseIcon from '@material-ui/icons/Close';
-import withStyles from "@material-ui/core/es/styles/withStyles";
+import withStyles from '@material-ui/core/es/styles/withStyles';
 
 const styles = theme => ({
   success: {
@@ -45,7 +45,6 @@ const variantIcon = {
   error: ErrorIcon,
   info: InfoIcon,
 };
-
 
 function NoticeSnackbarContentComponent(props) {
   const { classes, className, message, onClose, variant, ...other } = props;
@@ -86,37 +85,36 @@ class NotificationContainer extends React.Component {
     open: false,
   };
 
-  componentWillMount(){
+  componentWillMount() {
     NotificationManager.addChangeListener(this.handleStoreChange);
-  };
+  }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     NotificationManager.removeChangeListener(this.handleStoreChange);
-  };
+  }
 
-  handleStoreChange = (queue) => {
-
-    if (this.state.open){
+  handleStoreChange = queue => {
+    if (this.state.open) {
       this.setState({
         open: false,
         queue,
       });
-    }else {
+    } else {
       this.processQueue(queue);
     }
   };
 
-  handleRequestHide = (notification) => {
+  handleRequestHide = notification => {
     NotificationManager.remove(notification);
   };
 
-  processQueue = (queue) => {
+  processQueue = queue => {
     const open = queue.length > 0;
 
     this.setState({
       messageObject: queue.shift() || {},
       queue,
-      open
+      open,
     });
   };
 
@@ -147,7 +145,7 @@ class NotificationContainer extends React.Component {
           onClose={this.handleExited}
           variant={messageObject.type}
           message={messageObject.message}
-          />
+        />
       </Snackbar>
     );
   }
