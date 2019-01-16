@@ -11,9 +11,12 @@ import FollowingList from './common/component/FollowingList';
 import FavList from './common/component/FavList';
 import { Tag } from 'antd';
 import logo from '../../assets/8.jpg';
+
 import { IconButton, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import UserPaper from './common/component/UserPaper';
+
+import TextResolve from '@/lib/component/TextResolve'
 
 const styles = theme => ({
   backgroundProfile: {
