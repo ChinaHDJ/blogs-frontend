@@ -11,6 +11,9 @@ import FollowingList from './common/component/FollowingList';
 import FavList from './common/component/FavList';
 import { Tag } from 'antd';
 import logo from '../../assets/8.jpg';
+import { IconButton, Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import UserPaper from './common/component/UserPaper';
 
 const styles = theme => ({
   backgroundProfile: {
@@ -71,52 +74,7 @@ class User extends React.Component {
           justify="center"
           alignItems="flex-end"
         >
-          <Grid item xs={'auto'} sm={2} />
-          <Grid item xs={12} sm={8}>
-            <Paper className={classes.paper}>
-              <Grid
-                container
-              >
-                <Grid item
-                      xs={3}
-                      sm='auto'
-                >
-                  <Avatar className={classes.avatar} />
-                </Grid>
-
-
-                <Grid
-                  item
-                  xs={9}
-                  sm={8}
-                  container
-                >
-                  <Grid
-                    item
-                    xs
-                    container
-                    direction="column"
-                    spacing={16}
-                    justify="flex-end"
-                    alignItems="flex-start"
-                    style={{marginLeft: 5}}
-                  >
-                    <Grid item xs>
-                      <div style={{height: 30}}>
-                        <h2><b style={{color: '#0277bd'}}>ChinaHDJ</b></h2>
-                      </div>
-
-                      <div style={{height: 50, color: '#b0bec5'}}>
-                        在别人贪婪的时候恐惧，在别人恐惧的时候贪婪。                 ---沃伦 巴菲特
-                      </div>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Paper>
-            <br />
-          </Grid>
-          <Grid item xs={'auto'} sm={2} />
+          <UserPaper />
         </Grid>
 
         <Paper>
