@@ -17,6 +17,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import UserPaper from './common/component/UserPaper';
 
 import TextResolve from '@/lib/component/TextResolve'
+import Media from "react-media";
 
 const styles = theme => ({
   backgroundProfile: {
@@ -65,9 +66,10 @@ class User extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, isMobile } = this.props;
     const { leftTabIndex, rightTabIndex } = this.state;
 
+    console.log(isMobile);
     return (
       <Fragment>
         <Grid
@@ -77,7 +79,7 @@ class User extends React.Component {
           justify="center"
           alignItems="flex-end"
         >
-          <UserPaper />
+          <UserPaper isMobile={isMobile} />
         </Grid>
 
         <Paper>
@@ -97,7 +99,7 @@ class User extends React.Component {
         <Grid container>
           <Grid item xs={'auto'} sm={2} />
           <Grid item xs={12} sm={8}>
-            <Grid container spacing={16}>
+            <Grid container spacing={!isMobile * 16}>
               <Grid item xs={12} sm={4}>
                 <Paper>
                   <Tabs
@@ -165,4 +167,12 @@ class User extends React.Component {
   }
 }
 
-export default withStyles(styles)(User);
+function MediaUserPage(props) {
+  return (
+    <Media query={{ maxWidth: 599 }}>
+      {isMobile => <User {...props} isMobile={isMobile}/>}
+    </Media>
+  )
+}
+
+export default withStyles(styles)(MediaUserPage);

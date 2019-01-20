@@ -42,6 +42,7 @@
     "nprogress": "^0.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
+    "react-media": "^1.9.2",
     "react-swipeable-views": "^0.13.0",
     "react-transition-group": "^2.5.2"
   }
