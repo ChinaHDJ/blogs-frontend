@@ -20,9 +20,11 @@ export default {
         { path: '/login', component: './Login' },
         { path: '/user', component: './User' },
         { path: '/user/:id', component: './User' },
-        { path: '/a/:id', component: './Article/Show'},
+
+        //Article
         { path: '/a/edit', component: './Article/Edit'},
         { path: '/a/new', component: './Article/New'},
+        { path: '/a/:id', component: './Article/Show'},
       ],
     },
   ],

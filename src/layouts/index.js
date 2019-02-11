@@ -28,6 +28,7 @@ import NotificationContainer from '../lib/SnackbarApi/NotificationContainer';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { Badge, Avatar } from '@material-ui/core';
+import ReactEmoji from 'react-emoji';
 
 const drawerWidth = 240;
 
@@ -38,10 +39,6 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
   },
   title: {
     display: 'none',
@@ -143,7 +140,7 @@ const styles = theme => ({
     marginLeft: 0,
   },
 });
-
+ReactEmoji.emojify()
 class PersistentDrawerLeft extends React.Component {
   state = {
     open: false,

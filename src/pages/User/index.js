@@ -10,7 +10,7 @@ import SwipeableViews from 'react-swipeable-views';
 import FollowingList from './common/component/FollowingList';
 import FavList from './common/component/FavList';
 import { Tag } from 'antd';
-import logo from '../../assets/8.jpg';
+import logo from '@/assets/8.jpg';
 
 import { IconButton, Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -72,6 +72,11 @@ class User extends React.Component {
     console.log(isMobile);
     return (
       <Fragment>
+        <br/>
+
+        <Paper style={{padding: 10}}>
+        </Paper>
+
         <Grid
           container
           className={classes.backgroundProfile}

@@ -1,153 +1,114 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid/Grid';
-import TextField from '@material-ui/core/TextField/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import { withSnackbar } from 'notistack';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { connect } from 'dva';
-import { Form } from 'antd';
-import FormApi from '@/lib/FormApi';
-import LoadButton from '@/lib/component/LoadButton';
+import React from "react";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Icon from "@material-ui/core/Icon";
+// @material-ui/icons
+import Email from "@material-ui/icons/Email";
+import Lock from "@material-ui/icons/Lock";
+import ShortText from "@material-ui/icons/ShortText"
+// core components
+import GridContainer from "@/lib/component/Grid/GridContainer.jsx";
+import GridItem from "@/lib/component/Grid/GridItem.jsx";
+import Button from "@/lib/component/CustomButtons";
+import Card from "@/lib/component/Card/Card.jsx";
+import CardBody from "@/lib/component/Card/CardBody.jsx";
+import CardHeader from "@/lib/component/Card/CardHeader.jsx";
+import CardFooter from "@/lib/component/Card/CardFooter.jsx";
+import CustomInput from "@/lib/component/CustomInput/CustomInput.jsx";
 
-const styles = {
-  card: {
-    width: '100%',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-};
-@Form.create()
-@connect(({ loading }) => {
-  console.log(loading);
+import loginPageStyle from "@/lib/assets/jss/material-kit-react/views/loginPage.jsx";
 
-  return {
-    loading: loading.effects['user/login'],
-  };
-})
-class PageLogin extends React.Component {
-  state = {
-    remember_me: true,
-  };
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
-
-  handleClick = () => {};
-
-  renderLinearProgress = () => {
-    const { loading } = this.state;
-    if (loading) {
-      return <LinearProgress />;
-    }
-  };
-
-  handleSubmit(data) {
-    const { email, password, captcha = {} } = data;
-    const { dispatch } = this.props;
-
-    dispatch({
-      type: 'user/login',
-      payload: {
-        url: '/api/v1/sessions',
-        data: {
-          session: {
-            email: email.value,
-            password: password.value,
-            captcha: captcha.value,
-          },
-        },
-      },
-    });
+class LoginPage extends React.Component {
+  constructor(props) {
+    super(props);
+    // we use this to make the card to appear after the page has been rendered
+    this.state = {
+      cardAnimaton: "cardHidden"
+    };
   }
-
+  componentDidMount() {
+    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
+    setTimeout(
+      function() {
+        this.setState({ cardAnimaton: "" });
+      }.bind(this),
+      700
+    );
+  }
   render() {
-    const { classes = {}, loading } = this.props;
-    const { remember_me = false } = this.state;
-
+    const { classes } = this.props;
     return (
-      <Grid container>
-        <Grid item lg={4} xs={12} />
-        <Grid item lg={4} xs={12}>
-          <br />
-          <br />
-          <br />
-          <Card className={classes.card}>
-            <CardContent>
-              <form
-                id="loginForm"
-                onSubmit={FormApi.onSubmit(this.handleSubmit.bind(this), 'loginForm')}
-              >
-                {this.renderLinearProgress()}
-
-                <TextField
-                  ref="email"
-                  label="邮箱"
-                  name="email"
-                  style={{ width: '100%' }}
-                  margin="normal"
-                />
-
-                <TextField
-                  label="密码"
-                  style={{ width: '100%' }}
-                  type="password"
-                  name="password"
-                  margin="normal"
-                />
-
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name={'check'}
-                      checked={remember_me}
-                      onChange={this.handleChange('remember_me')}
+      <div>
+        <div className={classes.container}>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={12} md={4}>
+              <Card className={classes[this.state.cardAnimaton]}>
+                <form className={classes.form}>
+                  <CardHeader color="primary" className={classes.cardHeader}>
+                    <h4 style={{color: '#FFFFFF'}}>Sign Up || 登入</h4>
+                  </CardHeader>
+                  <p className={classes.divider}>注册一个账号</p>
+                  <CardBody>
+                    <CustomInput
+                      labelText="邮箱"
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        type: "email",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
                     />
-                  }
-                  label="记住我"
-                />
+                    <CustomInput
+                      labelText="密码"
+                      id="password"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        type: "password",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Lock className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
 
-                <CardActions>
-                  <LoadButton
-                    loading={loading}
-                    onClick={this.handleClick}
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    type={'submit'}
-                    style={{ width: '100px' }}
-                  >
-                    登入
-                  </LoadButton>
-                </CardActions>
-              </form>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item lg={4} xs={12} />
-      </Grid>
+                    <CustomInput
+                      labelText="验证码"
+                      id="captcha"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      inputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <ShortText className={classes.inputIconsColor}/>
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                  </CardBody>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button simple color="primary" size="lg">
+                      登入
+                    </Button>
+                  </CardFooter>
+                </form>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </div>
+      </div>
     );
   }
 }
 
-PageLogin.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withSnackbar(withStyles(styles)(PageLogin));
+export default withStyles(loginPageStyle)(LoginPage);

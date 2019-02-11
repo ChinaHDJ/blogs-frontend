@@ -11,6 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from "@material-ui/core/Menu/Menu";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ButtonBase from "@material-ui/core/es/ButtonBase/ButtonBase";
+import CustomDropdown from "@/lib/component/CustomDropdown";
 
 const styles = theme => ({
   paper: {
@@ -91,7 +92,6 @@ class UserPaper extends React.Component {
           <Card className={classes.paper}>
             <CardHeader
               avatar={<Avatar aria-label="Recipe" className={classes.avatar} />}
-              action={this.renderMoreButton.bind(this)()}
               title={this.renderCardHeaderTitle.bind(this)()}
               subheader={<div style={{height: 50, color: '#b0bec5',display: 'table-cell', verticalAlign: 'bottom'}}>
                 在别人贪婪的时候恐惧，在别人恐惧的时候贪婪。                 ---沃伦 巴菲特
