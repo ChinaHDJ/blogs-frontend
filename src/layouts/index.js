@@ -20,10 +20,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { SnackbarProvider, withSnackbar } from 'notistack';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-import Notifier from './Notifier';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import CloseIcon from '@material-ui/icons/Close';
 import NotificationContainer from '../lib/SnackbarApi/NotificationContainer';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
@@ -250,9 +246,4 @@ class PersistentDrawerLeft extends React.Component {
   }
 }
 
-PersistentDrawerLeft.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-};
-
-export default withSnackbar(withStyles(styles, { withTheme: true })(PersistentDrawerLeft));
+export default (withStyles(styles, { withTheme: true })(PersistentDrawerLeft))

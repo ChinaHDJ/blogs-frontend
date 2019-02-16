@@ -157,15 +157,6 @@ export class MarkdownEditor extends React.Component {
   }
 }
 
-class MaterialUiTablePlugin extends React.Component {
-  render() {
-
-    console.log(this.props)
-
-    return <div>ewqewq</div>;
-  }
-}
-
 export default withStyles(styles)((props) => (
   <Media query={{ maxWidth: 599 }}>
     {isMobile => <MarkdownEditor {...props} isMobile={isMobile}/>}
