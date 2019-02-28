@@ -9,7 +9,7 @@ const Button = ({ onClick, style, icon, openDialog, isImageDialog, tooltipText }
   <Tooltip title={tooltipText}>
     <IconButton
       aria-label={tooltipText}
-      onClick={onClick}
+      onClick={console.log}
       style={{ ...style, minWidth: '36px' }}
     >
       {icon}

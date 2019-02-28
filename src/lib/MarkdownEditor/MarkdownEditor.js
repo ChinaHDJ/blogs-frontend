@@ -29,7 +29,7 @@ const { EmojiSuggestions } = emojiPlugin;
 
 const styles = () => ({
   markdownCard: {
-    height: '100%',
+    height: 804,
     padding: 30,
     borderRadius: 1,
     overflow: 'auto'
@@ -38,7 +38,7 @@ const styles = () => ({
     lineHeight: 0
   },
   editInfo: {
-    height: 150,
+    height: 170,
     borderRadius: 1,
     padding: 10,
   },
@@ -84,7 +84,7 @@ export class MarkdownEditor extends React.Component {
         avatar: 'https://pbs.twimg.com/profile_images/517863945/mattsailing_400x400.jpg',
       }]
     })
-  }
+  };
 
   componentDidMount() {
     this.setState({
@@ -123,68 +123,60 @@ export class MarkdownEditor extends React.Component {
     const { MentionSuggestions } = this.mentionPlugin;
     const plugins = [this.mentionPlugin, emojiPlugin];
     const { cm, tokens, title, currCodeStyleKey, eyeType } = this.state;
-    const options = {
-      lineNumbers: false,
-      mode: 'markdown',
-      readOnly: false,
-    };
-    const screenHeight = document.body.clientHeight - 120;
-
-    console.log(this.state.editorState.getCurrentContent().getBlocksAsArray())
-    const arr = this.state.editorState.getCurrentContent().getBlocksAsArray();
-
-    arr.forEach((a) => {
-      console.log(a.getText())
-    });
 
     return (
       <div>
-        <Grid container spacing={isMobile ? 0 : 16}>
-          <Grid style={{display: !isMobile || !this.state.eyeType ? "block" : "none", height: screenHeight - 120}} item sm={6} xs={12}>
-            <Paper className={classes.editInfo}>
-              <TextField
-                id="articleTitle"
-                label="文章标题"
-                className={classes.textField}
-                value={this.state.name}
-                margin="normal"
-                variant="filled"
-                fullWidth
-              />
-              <ChipInput
-                defaultValue={['foo', 'bar']}
-                onChange={console.log}
-                placeholder={"文章标签"}
-                fullWidth
-              />
-            </Paper>
-
-            <Card style={{height: isMobile ? screenHeight : screenHeight - 205}}>
-
-              <div>
-                <div className={editorStyles.editor} onClick={this.focus}>
-                  <Editor
-                    editorState={this.state.editorState}
-                    onChange={this.onChange}
-                    plugins={plugins}
-                    ref={(element) => { this.editor = element; }}
-                  />
-                  <MentionSuggestions
-                    onSearchChange={this.onSearchChange}
-                    suggestions={this.state.suggestions}
-                  />
-                  <EmojiSuggestions />
-                </div>
+        <ToolbarPanel
+          cm={cm}
+          tokens={tokens}
+          onCodeStyleSelectChange={this.onCodeStyleSelectChange}
+          title={title}
+          selectValue={currCodeStyleKey}
+          isMobile={isMobile}
+          onToggleEye={this.onToggleEye}
+          eyeType={eyeType}
+        />
+        <Grid container spacing={isMobile ? 0 : 8}>
+          <Grid style={{display: !isMobile || !this.state.eyeType ? "block" : "none"}} item sm={6} xs={12}>
+            <Paper>
+              <Paper className={classes.editInfo}>
+                <TextField
+                  id="articleTitle"
+                  label="文章标题"
+                  value={this.state.name}
+                  margin="normal"
+                  variant="filled"
+                  fullWidth
+                />
+                <ChipInput
+                  defaultValue={['foo', 'bar']}
+                  onChange={console.log}
+                  placeholder={"文章标签"}
+                  fullWidth
+                />
+              </Paper>
+              <div className={editorStyles.editor} onClick={this.focus}>
+                <Editor
+                  editorState={this.state.editorState}
+                  onChange={this.onChange}
+                  plugins={plugins}
+                  ref={(element) => { this.editor = element; }}
+                />
+                <MentionSuggestions
+                  onSearchChange={this.onSearchChange}
+                  suggestions={this.state.suggestions}
+                />
+                <EmojiSuggestions />
               </div>
 
-              <Button style={{margin: 20}} variant="contained" color="primary" className={classes.button}>
+              <Button style={{margin: 10}} variant="contained" color="primary" className={classes.button}>
                 发布文章
               </Button>
-            </Card>
+            </Paper>
           </Grid>
 
-          <Grid style={{display: !isMobile || this.state.eyeType ? "block" : "none", height: screenHeight}} item sm={6} xs={12}>
-            <Paper className={classes.markdownCard} style={{height: '100%'}}>
+          <Grid style={{display: !isMobile || this.state.eyeType ? "block" : "none"}} item sm={6} xs={12}>
+            <Paper className={classes.markdownCard}>
               <h1>文章标题</h1>
               <Divider/>
               <MarkdownParser source={handleData(this.state.editorState.getCurrentContent())} currCodeStyleKey={this.state.currCodeStyleKey} />

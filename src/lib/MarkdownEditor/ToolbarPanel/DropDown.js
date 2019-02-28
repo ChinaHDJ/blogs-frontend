@@ -55,7 +55,6 @@ class DropDown extends React.Component{
           {options.map((option, i) => (
             <MenuItem key={i} style={option.style} onClick={() => {
               this.handleClose();
-              onItemTouchTap(0)
             }}>
               {option.primaryText}
             </MenuItem>

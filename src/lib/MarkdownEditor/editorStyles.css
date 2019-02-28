@@ -5,7 +5,8 @@
   border-radius: 2px;
   margin-bottom: 2em;
   background: #fefefe;
-  height: 200px;
+  height: 550px;
+  overflow: auto;
 }
 
 .editor :global(.public-DraftEditor-content) {
